@@ -57,10 +57,10 @@ def get_page_content():
         try:
 #            nextPageBtn = driver.find_element_by_class_name("pager_next")
             i = 1
-            while i<2:
+            while i<31:
                 nextPageBtn = driver.find_element_by_class_name("pager_next")
                 ActionChains(driver).move_to_element(nextPageBtn).perform()
-                nextPageBtn.click();
+                nextPageBtn.click()
                 time.sleep(2)
                 htmls.append(driver.page_source)
                 i +=1
@@ -95,7 +95,6 @@ def get_position_info(htmlContents):
             posi.append(position.get("data-positionname"))
             res.append(posi)
             
-#        print(position.find_all())
     return res
 
 
@@ -115,7 +114,7 @@ def main():
     for row in info:
         ws1.append(row)
         insert(conn,tuple(row))
-
+    conn.close()
     wb.save('{}职位信息.xlsx'.format(lang_name))
 
 if __name__ == '__main__':
